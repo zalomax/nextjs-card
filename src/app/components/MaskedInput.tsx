@@ -1,19 +1,19 @@
 'use client'
-import {FC, useEffect} from "react"
+import { FC, useEffect } from 'react'
 import InputMask from 'react-input-mask'
-import {useController} from 'react-hook-form'
+import { useController } from 'react-hook-form'
 
-const MaskedInput: FC<any> = ({formState: {errors}, control, setFocus, config}) => {
-    const {name, nextFieldName, placeholder, label, mask, formatChars, maxLength = null} = config
+const MaskedInput: FC<any> = ({ formState: { errors }, control, setFocus, config }) => {
+    const { name, nextFieldName, placeholder, label, mask, formatChars, maxLength = null } = config
 
     const {
         field,
-        fieldState: {invalid, isDirty},
-    } = useController({name, control})
+        fieldState: { invalid, isDirty },
+    } = useController({ name, control })
 
-    const {onChange, onBlur, value} = field
+    const { onChange, onBlur, value } = field
 
-    const handleOnChange = (e) => {
+    const handleOnChange = (e: any) => {
         e.persist()
         onChange(e.target.value)
     }
@@ -22,6 +22,7 @@ const MaskedInput: FC<any> = ({formState: {errors}, control, setFocus, config}) 
         if (isDirty && invalid === false) {
             nextFieldName && setFocus(nextFieldName)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [invalid])
 
     return (
@@ -37,7 +38,7 @@ const MaskedInput: FC<any> = ({formState: {errors}, control, setFocus, config}) 
                 onChange={handleOnChange}
                 onBlur={onBlur}
             >
-                {(inputProps) => (
+                {(inputProps: any) => (
                     <input
                         {...inputProps}
                         ref={field.ref}

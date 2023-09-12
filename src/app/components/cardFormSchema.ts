@@ -1,6 +1,6 @@
-import {z} from 'zod'
+import { z } from 'zod'
 import luhn from 'luhn'
-import {CARD_NUMBER_PREFIX} from '@/app/constants/cardType'
+import { CARD_NUMBER_PREFIX } from '@/app/constants/cardType'
 
 const CURRENT_YEAR = 23
 
@@ -13,7 +13,7 @@ const cardFormSchema = z.object({
         }
 
         return true
-    }, {message: 'invalid card number'}),
+    }, { message: 'invalid card number' }),
     expirationDate: z.string().refine((val) => {
         const expirationDateParts = val.split('/')
         if (expirationDateParts.length < 2) {
@@ -26,14 +26,16 @@ const cardFormSchema = z.object({
         const isYear = year >= CURRENT_YEAR && year <= 99
 
         return isMonth && isYear
-    }, {message: 'invalid date'}),
-    cvv: z.string().min(3, {message: 'invalid CVV'}),
+    }, { message: 'invalid date' }),
+    cvv: z.string().min(3, { message: 'invalid CVV' }),
     // cardName: z.string().min(2, {message: 'invalid card name'}).max(25, {message: 'invalid card name'}),
 }).refine((data) => {
-    const {cardNumber, cvv} = data
+    const { cardNumber, cvv } = data
+
     if (cardNumber && cardNumber[0] === CARD_NUMBER_PREFIX.AMEX && (!cvv || cvv.length < 4)) {
         return false
     }
+
     if (!cvv || cvv.length < 3) {
         return false
     }
