@@ -1,3 +1,8 @@
+# Git
+git clone git@bitbucket.org:cherryshop/next-card.git .
+
+ssh-keygen -t ed25519 -b 4096 -C "6357654@gmail.com" -f id_rsa
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
